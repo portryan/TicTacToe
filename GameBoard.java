@@ -21,9 +21,13 @@ public class GameBoard{
         }
     }
 
-    public char[][] insert(char c, int row, int col){
-        board[row][col] = c;
-        return board;
+    public boolean insert(char c, int row, int col){
+        if (board[row][col] == '-'){
+            board[row][col] = c;
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public void printBoard(){

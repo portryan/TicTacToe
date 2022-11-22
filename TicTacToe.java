@@ -8,29 +8,36 @@ public class TicTacToe{
         GameBoard b = new GameBoard(size);
         b.printBoard();
         
-        int turn = 0;
         char player;
-        while (true){
+        for (int turn = 0; turn < (size * size); turn++){
             if (turn % 2 == 0){
                 player = 'X';
             }else{
                 player = 'O';
             }
-            System.out.println("\n" + player + "'s turn!");
-            System.out.println("Which row?: ");
-            int row = input.nextInt();
-            System.out.println("Which column?: ");
-            int col = input.nextInt();
+            int row, col;
+            while (true){
+                System.out.println("\n" + player + "'s turn!");
+                System.out.println("Which row?: ");
+                row = input.nextInt();
+                System.out.println("Which column?: ");
+                col = input.nextInt();
 
-            b.insert(player, row, col);
+                if (b.insert(player, row, col)){
+                    break;
+                }else{
+                    System.out.println("ERROR: Choose another position");
+                }
+            }
+            
             b.printBoard();
 
             if(b.checkWin(player, row, col)){
                 System.out.println(player + " WINS!");
-                break;
+                System.exit(0);
             }
-            turn++;
         }
+        System.out.println("TIE!");
         input.close();
     }
 
