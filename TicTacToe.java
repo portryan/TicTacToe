@@ -2,8 +2,11 @@ import java.util.Scanner;
 public class TicTacToe{
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        GameBoard b = new GameBoard();
 
+        System.out.println("What size board?: ");
+        int size = input.nextInt();
+        GameBoard b = new GameBoard(size);
+        b.printBoard();
         while (true){
             System.out.println("Enter Letter (X or O): ");
             char letter = input.next().charAt(0);
@@ -20,6 +23,7 @@ public class TicTacToe{
                 break;
             }
         }
+        input.close();
     }
 
 }

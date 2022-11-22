@@ -1,10 +1,21 @@
 public class GameBoard{
-private final int BOARD_SIZE = 3;
-private char board[][] = new char[BOARD_SIZE][BOARD_SIZE];
-
+    private char board[][];
+    private int boardSize;
+    
     public GameBoard(){
-        for (int r = 0; r < BOARD_SIZE; r++){
-            for (int c = 0; c < BOARD_SIZE; c++){
+        boardSize = 3;
+        initBoard(boardSize);
+    }
+
+    public GameBoard(int size){
+        boardSize = size;
+        initBoard(boardSize);
+    }
+
+    public void initBoard(int size){
+        board = new char[size][size];
+        for (int r = 0; r < boardSize; r++){
+            for (int c = 0; c < boardSize; c++){
                 board[r][c] = '-';
             }
         }
@@ -16,8 +27,8 @@ private char board[][] = new char[BOARD_SIZE][BOARD_SIZE];
     }
 
     public void printBoard(){
-        for (int r = 0; r < BOARD_SIZE; r++){
-            for(int c = 0; c < BOARD_SIZE; c++){
+        for (int r = 0; r < boardSize; r++){
+            for(int c = 0; c < boardSize; c++){
                 System.out.print(board[r][c]);
             }
             System.out.print("\n");
@@ -26,46 +37,46 @@ private char board[][] = new char[BOARD_SIZE][BOARD_SIZE];
 
     public boolean checkWin(char c, int row, int col){
         int count = 0;
-        for (int i = 0; i < BOARD_SIZE; i++){ // check vertical
+        for (int i = 0; i < boardSize; i++){ // check vertical
             if (board[i][col] == c){
                 count++;
             }
         }    
-        if (count == BOARD_SIZE){
+        if (count == boardSize){
             return true;
         }
 
         count = 0;
-        for (int i = 0; i < BOARD_SIZE; i++){ // check horizontal
+        for (int i = 0; i < boardSize; i++){ // check horizontal
             if (board[row][i] == c){
                 count++;
             }
         }
-        if (count == BOARD_SIZE){
+        if (count == boardSize){
             return true;
         }
 
         count = 0;
         if (row == col){ // check diagonal (slope going down)
-            for (int i = 0, j = 0; i < BOARD_SIZE && j < BOARD_SIZE; i++, j++){
+            for (int i = 0, j = 0; i < boardSize && j < boardSize; i++, j++){
                 if (board[i][j] == c){
                     count++;
                 }
             }
         }
-        if (count == BOARD_SIZE){
+        if (count == boardSize){
             return true;
         }
 
         count = 0;
-        if (col == BOARD_SIZE-row-1){ // check diagonal (slope going up)
-            for (int i = 0, j = BOARD_SIZE-1; i < BOARD_SIZE && j >= 0; i++, j--){
+        if (col == boardSize-row-1){ // check diagonal (slope going up)
+            for (int i = 0, j = boardSize-1; i < boardSize && j >= 0; i++, j--){
                 if (board[i][j] == c){
                     count++;
                 }
             }
         }
-        if (count == BOARD_SIZE){
+        if (count == boardSize){
             return true;
         }
 
