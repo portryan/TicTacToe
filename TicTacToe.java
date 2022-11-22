@@ -7,21 +7,29 @@ public class TicTacToe{
         int size = input.nextInt();
         GameBoard b = new GameBoard(size);
         b.printBoard();
+        
+        int turn = 0;
+        char player;
         while (true){
-            System.out.println("Enter Letter (X or O): ");
-            char letter = input.next().charAt(0);
+            if (turn % 2 == 0){
+                player = 'X';
+            }else{
+                player = 'O';
+            }
+            System.out.println("\n" + player + "'s turn!");
             System.out.println("Which row?: ");
             int row = input.nextInt();
             System.out.println("Which column?: ");
             int col = input.nextInt();
 
-            b.insert(letter, row, col);
+            b.insert(player, row, col);
             b.printBoard();
 
-            if(b.checkWin(letter, row, col)){
-                System.out.println(letter + " WINS!");
+            if(b.checkWin(player, row, col)){
+                System.out.println(player + " WINS!");
                 break;
             }
+            turn++;
         }
         input.close();
     }
